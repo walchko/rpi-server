@@ -14,6 +14,7 @@ You can use any slicer to generate gcode and print the bracket
     to pull the nuts through
 - M3-0.5 x 6 screws for the hard drive
 - raspberry pi, hard drive, USB-to-SATA adaptor
+    - I use a Startech cable I got from Amazon
 - [PiOLED 128x32 display](https://www.adafruit.com/product/3527)
     - This is not necessary, but it is nice to display server name/address/performance
     - `sudo i2cdetect -y 1` should show the display at `0x3C`
@@ -26,6 +27,24 @@ There is nothing here you really need
 command line, web server (node), and file sharing (samba)
 - PiOLED is in the software folder
 
+## Changes
+
+- **Version 4**
+    - Using all metric M2 and M3 screws now
+    - Cut out the front so you can get to the SD card easier
+    - Embedded nuts in the design, so they aren't sticking up on the top
+    - Updated the LCD script
+        - Linux release name
+        - Added kernel version
+        - Heartbeat is only 1 character now
+- **Version 3**
+    - Raised the pi up higher on the pillars
+    - Centered the pi in the middle of the bracket
+    - Skeletonize the design so it doesn't use so much plastic
+- **Version 2**
+    - Added a script for Adafruit's LCD
+    
+    
 # MIT License
 
 **Copyright (c) 2019 Kevin Walchko**
