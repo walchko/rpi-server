@@ -15,8 +15,11 @@ You can use any slicer to generate gcode and print the bracket
 - M3-0.5 x 6 screws for the hard drive
 - raspberry pi, hard drive, USB-to-SATA adaptor
 - [PiOLED 128x32 display](https://www.adafruit.com/product/3527)
+    - This is not necessary, but it is nice to display server name/address/performance
 
 ## Software
+
+There is nothing here you really need
 
 - [mote](https://github.com/MomsFriendlyRobotCompany/mote) for setting up the
 command line, web server (node), and file sharing (samba)
