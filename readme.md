@@ -1,4 +1,4 @@
-![](pics/server-3.png)
+![](pics/server-3.jpg)
 
 # Raspberry Pi Server
 
