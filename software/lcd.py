@@ -9,6 +9,7 @@ import socket
 import time
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_SSD1306
+import os
 
 from PIL import Image
 from PIL import ImageFont
@@ -50,7 +51,23 @@ i = 0
 x = 0
 top = -2
 
+def getRelease():
+    with open("/etc/os-release") as fd:
+        d = fd.read()
+    m = {}
+    try:
+        for k,v in d:
+            m[k] = v
+    except Exception:
+        pass
+    return m
+
+
 try:
+    relinfo = getRelease()
+    rel = relinfo["VERSION_CODENAME"]
+    
+    ver = os.uname().release.split('-')[0]
     while True:
         draw.rectangle((0,0,width,height), outline=0, fill=0)
 
@@ -67,9 +84,14 @@ try:
                 addr = nf.ifaddresses(ip)[nf.AF_INET][0]['addr']
                 addrs.append((ip, addr,))
 
-        str = "{} AP[{}] {}".format(
+#         str = "{} AP[{}] {}".format(
+#             socket.gethostname().split('.')[0],
+#             'UP' if ap else 'DOWN',
+#             spin[i%wrap]
+#         )
+        str = "{} {} {}".format(
             socket.gethostname().split('.')[0],
-            'UP' if ap else 'DOWN',
+            rel,
             spin[i%wrap]
         )
         # print(str)
