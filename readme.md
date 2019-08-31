@@ -1,4 +1,4 @@
-![](pics/server-2.png)
+![](pics/server-3.png)
 
 # Raspberry Pi Server
 
@@ -43,8 +43,8 @@ command line, web server (node), and file sharing (samba)
     - Skeletonize the design so it doesn't use so much plastic
 - **Version 2**
     - Added a script for Adafruit's LCD
-    
-    
+
+
 # MIT License
 
 **Copyright (c) 2018 Kevin Walchko**
