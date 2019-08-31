@@ -42,10 +42,8 @@ draw.rectangle((0,0,width,height), outline=0, fill=0)
 font = ImageFont.load_default()
 
 # https://github.com/sindresorhus/cli-spinners/blob/HEAD/spinners.json
-spin = ['|','/','--','\\','+']
-# spin = ["◴","◷","◶","◵"]
-# spin = ["◐","◓","◑","◒"]
-# spin = ["⠋","⠙","⠹","⠸","⠼","⠴","⠦","⠧","⠇","⠏"]
+# spin = ['|','/','--','\\','+']
+spin = ['.','o','O','0','O','o']
 wrap = len(spin)
 i = 0
 x = 0
@@ -55,11 +53,18 @@ def getRelease():
     with open("/etc/os-release") as fd:
         d = fd.read()
     m = {}
-    try:
-        for k,v in d:
+    print(d)
+    d = d.split('\n')
+    for s in d:
+        print(">>", s)
+        try:
+            k,v = s.split('=')
+            print(k,'\n',v)
             m[k] = v
-    except Exception:
-        pass
+        except Exception as e:
+            print(e)
+            continue
+    print(m)
     return m
 
 
@@ -68,6 +73,7 @@ try:
     rel = relinfo["VERSION_CODENAME"]
     
     ver = os.uname().release.split('-')[0]
+    ver = '.'.join(ver.split('.')[:2])
     while True:
         draw.rectangle((0,0,width,height), outline=0, fill=0)
 
@@ -84,17 +90,13 @@ try:
                 addr = nf.ifaddresses(ip)[nf.AF_INET][0]['addr']
                 addrs.append((ip, addr,))
 
-#         str = "{} AP[{}] {}".format(
-#             socket.gethostname().split('.')[0],
-#             'UP' if ap else 'DOWN',
-#             spin[i%wrap]
-#         )
-        str = "{} {} {}".format(
+        str = "{} {} {} {}".format(
             socket.gethostname().split('.')[0],
             rel,
+            ver,
             spin[i%wrap]
         )
-        # print(str)
+        
         i += 1
         draw.text((x,top), str, font=font, fill=127)
 
