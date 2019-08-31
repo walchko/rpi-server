@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+# MIT License 2018 Kevin J. Walchko
+
 # This is run using the system python, so just use python3
 # make sure to install:
 # pip install -U Adafruit-SSD1306 pillow netifaces psutil
-# from __future__ import printfunction division
+
 import netifaces as nf
 import psutil as ps
 import socket
