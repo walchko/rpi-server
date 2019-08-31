@@ -7,7 +7,7 @@ import netifaces as nf
 import psutil as ps
 import socket
 import time
-import Adafruit_GPIO.SPI as SPI
+# import Adafruit_GPIO.SPI as SPI
 import Adafruit_SSD1306
 import os
 
@@ -53,25 +53,26 @@ def getRelease():
     with open("/etc/os-release") as fd:
         d = fd.read()
     m = {}
-    print(d)
+    # print(d)
     d = d.split('\n')
     for s in d:
-        print(">>", s)
+        # print(">>", s)
         try:
             k,v = s.split('=')
-            print(k,'\n',v)
+            # print(k,'\n',v)
             m[k] = v
         except Exception as e:
-            print(e)
+            # print(e)
             continue
-    print(m)
+    # print(m)
     return m
 
 
 try:
+    # get release name: buster
     relinfo = getRelease()
     rel = relinfo["VERSION_CODENAME"]
-    
+    # get linux kernel version: 4.23
     ver = os.uname().release.split('-')[0]
     ver = '.'.join(ver.split('.')[:2])
     while True:
@@ -79,32 +80,35 @@ try:
 
         # get interfaces
         ifs = nf.interfaces()
-        ap = False
-        if 'wlan1' in ifs:
-            addr = nf.ifaddresses('wlan0')[nf.AF_INET][0]['addr']
-            if addr == '10.10.10.1':
-                ap = True
+        # ap = False
+        # if 'wlan1' in ifs:
+        #    addr = nf.ifaddresses('wlan0')[nf.AF_INET][0]['addr']
+        #    if addr == '10.10.10.1':
+        #        ap = True
         addrs = []
         for ip in ['en0', 'eth0', 'wlan0']:
             if ip in ifs:
                 addr = nf.ifaddresses(ip)[nf.AF_INET][0]['addr']
                 addrs.append((ip, addr,))
 
+        # print heartbeat, name, release, kernel version
         str = "{} {} {} {}".format(
+            spin[i%wrap],
             socket.gethostname().split('.')[0],
             rel,
-            ver,
-            spin[i%wrap]
+            ver
         )
-        
+
         i += 1
         draw.text((x,top), str, font=font, fill=127)
 
+        # get cpu and memory performance
         cpu = ps.cpu_percent()
         mem = ps.virtual_memory().percent
         str = "CPU: {:3.0f}% Mem: {:3.0f}%".format(cpu,mem)
         draw.text((x,top+8), str, font=font, fill=255)
 
+        # get networking for ethernet and wifi
         for cnt, (ip, addr) in enumerate(addrs):
             str = "{}: {}".format(ip, addr)
             draw.text((x,top+8+(cnt+1)*8), str, font=font, fill=255)
