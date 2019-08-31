@@ -16,6 +16,7 @@ You can use any slicer to generate gcode and print the bracket
 - raspberry pi, hard drive, USB-to-SATA adaptor
 - [PiOLED 128x32 display](https://www.adafruit.com/product/3527)
     - This is not necessary, but it is nice to display server name/address/performance
+    - `sudo i2cdetect -y 1` should show the display at `0x3C`
 
 ## Software
 
