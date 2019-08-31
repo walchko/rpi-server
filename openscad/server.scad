@@ -1,23 +1,10 @@
+// MIT License 2018 Kevin J. Walchko
+
 $fn=90;
-/* use <lib/misc.scad>; */
-use <lib/pi.scad>;
+
+/* use <lib/pi.scad>; */
 
 module hex(side,t){
-    // side: side of hex
-    // t: thickness of nut
-    /* s = side/2;
-    h = sqrt(side*side-s*s);
-    pts = [
-        [2*s,0],
-        [s,h],
-        [-s,h],
-        [-2*s,0],
-        [-s,-h],
-        [s,-h]
-    ];
-    linear_extrude(height=t){
-        polygon(pts);
-    } */
     intersection(){
         cube([side, side, 1.5*t],center=true);
         rotate([0,0,45]) cube([side, side, 1.5*t], center=true);
@@ -121,8 +108,8 @@ module plate(width, length, thick=3){
 
         // nut cutouts
         translate([xbase, ybase, -1]){
-            side = 4;
-            t = 5;
+            side = 4.1;
+            t = 7;
             /* translate([0,0,0]) cylinder(h=up, d=sdia); */
             translate([0,0,0]) hex(side, t);
             translate([49,0,0]) hex(side, t);
