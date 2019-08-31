@@ -2,13 +2,35 @@ $fn=90;
 /* use <lib/misc.scad>; */
 use <lib/pi.scad>;
 
+module hex(side,t){
+    // side: side of hex
+    // t: thickness of nut
+    /* s = side/2;
+    h = sqrt(side*side-s*s);
+    pts = [
+        [2*s,0],
+        [s,h],
+        [-s,h],
+        [-2*s,0],
+        [-s,-h],
+        [s,-h]
+    ];
+    linear_extrude(height=t){
+        polygon(pts);
+    } */
+    intersection(){
+        cube([side, side, 1.5*t],center=true);
+        rotate([0,0,45]) cube([side, side, 1.5*t], center=true);
+    }
+}
 
 module M3(){
     cylinder(h=40, d=3.5, center=true);
+    translate([0,0,2]) cylinder(h=6, d=7, center=false);
 }
 
 module M2(){
-    cylinder(h=40, d=2.6, center=true);
+    cylinder(h=40, d=2.6, center=false);
 }
 
 module base(width, length, thick, dia){
@@ -21,6 +43,7 @@ module base(width, length, thick, dia){
 }
 
 module hcut(dia, length){
+    // along x-axis
     translate([0,0,-5]) linear_extrude(height=15) hull(){
         circle(d=dia);
         translate([length,0,0]) circle(d=dia);
@@ -28,6 +51,7 @@ module hcut(dia, length){
 }
 
 module vcut(dia, length){
+    // along y-axis
     translate([0,0,-5]) linear_extrude(height=15) hull(){
         circle(d=dia);
         translate([0,length,0]) circle(d=dia);
@@ -50,7 +74,7 @@ module plate(width, length, thick=3){
             translate([xbase, ybase, thick-1]){
                 sd1 = 13;
                 sd2 = 5;
-                up = 6;
+                up = 5;
                 translate([0,0,0]) cylinder(h=up, d1=sd1,d2=sd2);
                 translate([49,0,0]) cylinder(h=up, d1=sd1, d2=sd2);
                 translate([49,58,0]) cylinder(h=up, d1=sd1, d2=sd2);
@@ -81,13 +105,15 @@ module plate(width, length, thick=3){
             translate([0,58,0]) M2();
         }
 
-        // horizontal cuts
+        // horizontal cuts - along x-axis
         cw = 30;
         cd = 8;
-        translate([(width-cw)/2,cd/1.5,0]) hcut(cd, cw);
+        /* translate([(width-cw)/2,cd/1.5,0]) hcut(cd, cw);
+        translate([(width-cw)/2,cd/1.5-5,0]) hcut(cd, cw); */
+        translate([(width-cw)/2,cd/1.5-7,-1]) base(30, 10, thick*5, dia);
         translate([(width-cw)/2,length-cd/1.5,0]) hcut(cd, cw);
 
-        // vertical cuts
+        // vertical cuts - along y-axis
         cl = 38;
         cld = 6;
         translate([cld/1.5,(length-cl)/2,0]) vcut(cld, cl);
@@ -95,12 +121,13 @@ module plate(width, length, thick=3){
 
         // nut cutouts
         translate([xbase, ybase, -1]){
-            sdia = 6;
-            up = 4;
-            translate([0,0,0]) cylinder(h=up, d=sdia);
-            translate([49,0,0]) cylinder(h=up, d=sdia);
-            translate([49,58,0]) cylinder(h=up, d=sdia);
-            translate([0,58,0]) cylinder(h=up, d=sdia);
+            side = 4;
+            t = 5;
+            /* translate([0,0,0]) cylinder(h=up, d=sdia); */
+            translate([0,0,0]) hex(side, t);
+            translate([49,0,0]) hex(side, t);
+            translate([49,58,0]) hex(side, t);
+            translate([0,58,0]) hex(side, t);
         }
     }
 
