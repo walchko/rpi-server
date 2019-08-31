@@ -15,7 +15,9 @@ You can use any slicer to generate gcode and print the bracket
 
 ## Software
 
-TBD
+- [mote](https://github.com/MomsFriendlyRobotCompany/mote) for setting up the
+command line, web server (node), and file sharing (samba)
+- PiOLED is in the software folder
 
 # MIT License
 
