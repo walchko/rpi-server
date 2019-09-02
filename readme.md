@@ -8,13 +8,14 @@ The design uses [openscad](www.openscad.org) for the design of the bracket.
 You can use any slicer to generate gcode and print the bracket
 
 - 3d printer and any color PLA
-- M2-0.5 x 8 screws and nuts for the raspberry pi
+- M2-0.5 x 8mm screws and nuts for the raspberry pi
     - to get the nuts in the cut out, you can use the pull through method, since
-    they are sized as a press fit (meaning very tight). I used a 12 mm screw
+    they are sized as a press fit (meaning very tight). I used a 12mm screw
     to pull the nuts through
-- M3-0.5 x 6 screws for the hard drive
+- M3-0.5 x 6mm screws for the hard drive
 - raspberry pi, hard drive, USB-to-SATA adaptor
     - I use a Startech cable I got from Amazon
+    - I use an SSD because it is low power, a spinning disk might cause brown outs for you pi
 - [PiOLED 128x32 display](https://www.adafruit.com/product/3527)
     - This is not necessary, but it is nice to display server name/address/performance
     - `sudo i2cdetect -y 1` should show the display at `0x3C`
@@ -26,6 +27,7 @@ There is nothing here you really need
 - [mote](https://github.com/MomsFriendlyRobotCompany/mote) for setting up the
 command line, web server (node), and file sharing (samba)
 - PiOLED is in the software folder
+- [Plex](https://www.plex.tv/) maintains a version for Raspberry Pi, so you can 
 
 ## Changes
 
