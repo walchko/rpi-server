@@ -46,6 +46,12 @@ command line, web server (node), and file sharing (samba)
 - **Version 2**
     - Added a script for Adafruit's LCD
 
+## ToDo
+
+- I want to do an optional cover to protect the pi
+    - Maybe a fan?
+    - Maybe mount the LCD (or another one) differently
+    - Might be better to have it plexiglass instead of PLA?
 
 # MIT License
 
