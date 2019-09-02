@@ -53,7 +53,9 @@ command line, web server (node), and file sharing (samba)
     - Maybe mount the LCD (or another one) differently
     - Might be better to have it plexiglass instead of PLA?
 
-# MIT License
+# Hardware: Createive Commons-Attribution-ShareAlike
+
+# Software: MIT License
 
 **Copyright (c) 2018 Kevin Walchko**
 
