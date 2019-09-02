@@ -27,7 +27,7 @@ There is nothing here you really need
 - [mote](https://github.com/MomsFriendlyRobotCompany/mote) for setting up the
 command line, web server (node), and file sharing (samba)
 - PiOLED is in the software folder
-- [Plex](https://www.plex.tv/) maintains a version for Raspberry Pi, so you can 
+- [Plex](https://www.plex.tv/) maintains a version for Raspberry Pi, so you can serve up movies
 
 ## Changes
 
