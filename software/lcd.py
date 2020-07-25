@@ -10,24 +10,30 @@ import psutil as ps
 import socket
 import time
 # import Adafruit_GPIO.SPI as SPI
-import Adafruit_SSD1306
+# import Adafruit_SSD1306
 import os
 
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 
+from board import SCL, SDA
+import busio
+import adafruit_ssd1306
+
 # start ---
-disp = Adafruit_SSD1306.SSD1306_128_32(rst=24)
-disp.begin()
+i2c = busio.I2C(SCL, SDA)
+# disp = Adafruit_SSD1306.SSD1306_128_32(rst=24)
+disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c)
+# disp.begin()
 
 # Get display width and height.
 width = disp.width
 height = disp.height
 
 # clear display ----
-disp.clear()
-disp.display()
+# disp.clear()
+# disp.display()
 
 # setup ---
 # Create image buffer.
@@ -115,12 +121,17 @@ try:
             str = "{}: {}".format(ip, addr)
             draw.text((x,top+8+(cnt+1)*8), str, font=font, fill=255)
 
-        disp.image(image); disp.display()
+        disp.image(image);
+        disp.show()
         time.sleep(1)
 except KeyboardInterrupt:
     print('bye ...')
 
 # clear display ----
-disp.clear()
-disp.display()
-
+# disp.clear()
+# disp.display()
+# Draw a black filled box to clear the image.
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+disp.image(image);
+disp.show()
+time.sleep(0.1)
